@@ -11,4 +11,10 @@
     <style name="AppTheme.TranslucentStatus" parent="AppTheme">
 
     </style>
+
+    //toolbartext center
+    <style name="toolbar_title_centervertical">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
 </resources>

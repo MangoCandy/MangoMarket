@@ -1,9 +1,12 @@
 package com.mangocandy.login;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
@@ -21,14 +24,26 @@ import butterknife.ButterKnife;
 public class Act_Register extends MActivity {
     Context context = this;
     @BindView(R.id.backimage)
-    ImageView image;
+    ImageView backimage;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.maintext)
+    TextView maintext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
-        image = (ImageView)findViewById(R.id.backimage);
+
+        initView();
+    }
+
+    public void initView(){
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setToolbar(toolbar, true);
+        maintext = (TextView) findViewById(R.id.maintext);
+        backimage = (ImageView) findViewById(R.id.backimage);
         getImage();
     }
 
@@ -37,9 +52,10 @@ public class Act_Register extends MActivity {
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
-                String path = list.get(0).getAVFile("Url").getUrl();
-                Log.e("asd",path+"");
-                Glide.with(context).load(path).into(image);
+                AVObject object = list.get(0);
+                String path = object.getAVFile("Url").getUrl();
+                maintext.setBackgroundColor(Color.parseColor(object.getString("textColor")));
+                Glide.with(context).load(path).animate(R.anim.circle_s2b).into(backimage);
             }
         });
     }

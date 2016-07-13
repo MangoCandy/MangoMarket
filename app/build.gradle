@@ -43,5 +43,7 @@ dependencies {
     // LeanCloud 用户反馈包
     compile 'cn.leancloud.android:avoscloud-feedback:v3.+@aar'
     compile 'com.jakewharton:butterknife:8.2.1'
+    //Glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.android.support:design:23.4.0'
 }
